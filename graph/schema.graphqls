@@ -1,0 +1,116 @@
+type Organization {
+  tildaid: ID!
+  alias: String
+  name: String!
+  url: String
+  country: String
+  state: String
+  city: String
+  postalCode: String
+  email: String
+  contactPhone: String
+  bio: String
+  orgType: OrgType!
+  orgMemberships: [OrgMembership!]!
+}
+
+enum OrgType {
+  SMO
+  CRO
+  Sponsor
+}
+
+type User {
+  tildaid: ID!
+  onboarded: Boolean!
+  username: String!
+  name: String
+  email: String!
+  contact: String
+  bio: String
+  capabilities: String
+  location: String
+  orgMemberships: [OrgMembership!]!
+}
+
+type OrgMembership {
+  role: String!
+  user: User!
+  organization: Organization!
+}
+
+type Study {
+  tildaid: ID!
+  name: String!
+  status: String!
+  numapproved: Int!
+  numparticipants: Int!
+  numpatients: Int!
+  numpending: Int!
+  numrejected: Int!
+}
+
+type Site {
+  tildaid: ID!
+  name: String!
+  address: String!
+  capacity: String
+  city: String!
+  contactEmail: String
+  contactPhone: String
+  country: String!
+  createdAt: Float!
+  daysOfWeek: String
+  description: String
+  googleMapUrl: String
+  holdBitmap: Int
+  holidaysList: String
+  latitude: Float
+  longitude: Float
+  orgId: ID!
+  outstandingQueries: Int
+  postalCode: String!
+  primaryLocationId: ID
+  siteLogo: String
+  smoId: ID
+  state: String!
+  status: String!
+  streetAddress: String!
+  studiesSummary: [StudyStatusCount!]
+  subjectsCount: Int
+  suite: String
+  timeZone: String
+  twilioNumber: String
+  updatedAt: Float!
+  studies: [Study!]!
+}
+
+type StudyStatusCount {
+  status: String!
+  count: Int!
+}
+
+input OrganizationUpdate {
+  name: String
+  bio: String
+  email: String
+  alias: String
+  url: String
+  country: String
+  state: String
+  city: String
+  postalCode: String
+}
+
+type Query {
+  myProfile: User!
+  organizations: [Organization!]!
+  organization(id: ID!): Organization!
+  studies: [Study!]!
+  study(id: ID!): Study!
+  sites: [Site!]!
+}
+
+type Mutation {
+  updateOrganization(id: ID!, value: OrganizationUpdate!): Organization
+}
