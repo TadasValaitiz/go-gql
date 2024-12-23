@@ -7,8 +7,8 @@ package resolver
 import (
 	"context"
 	"fmt"
-	"go-gql-demo/graph/generated"
-	"go-gql-demo/graph/model"
+	"go-gql-demo/graph/gen/exec"
+	"go-gql-demo/graph/gen/model"
 )
 
 // UpdateOrganization is the resolver for the updateOrganization field.
@@ -28,13 +28,7 @@ func (r *queryResolver) Organizations(ctx context.Context) ([]*model.Organizatio
 
 // Organization is the resolver for the organization field.
 func (r *queryResolver) Organization(ctx context.Context, id string) (*model.Organization, error) {
-	// Create a string pointer for the alias
-	alias := "test-alias"
-	// Return a dummy organization for testing
-	return &model.Organization{
-		Name:  "Test Organization",
-		Alias: &alias,
-	}, nil
+	panic(fmt.Errorf("not implemented: Organization - organization"))
 }
 
 // Studies is the resolver for the studies field.
@@ -52,11 +46,11 @@ func (r *queryResolver) Sites(ctx context.Context) ([]*model.Site, error) {
 	panic(fmt.Errorf("not implemented: Sites - sites"))
 }
 
-// Mutation returns generated.MutationResolver implementation.
-func (r *Resolver) Mutation() generated.MutationResolver { return &mutationResolver{r} }
+// Mutation returns exec.MutationResolver implementation.
+func (r *Resolver) Mutation() exec.MutationResolver { return &mutationResolver{r} }
 
-// Query returns generated.QueryResolver implementation.
-func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
+// Query returns exec.QueryResolver implementation.
+func (r *Resolver) Query() exec.QueryResolver { return &queryResolver{r} }
 
 type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }

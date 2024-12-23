@@ -2,17 +2,21 @@ schema:
   - graph/*.graphqls
 
 exec:
-  filename: graph/generated/generated.go
-  package: generated
+  dir: graph/gen/exec
+  package: exec
+  layout: follow-schema
+  filename_template: "{name}.exec.go"
+
 
 model:
-  filename: graph/model/models_gen.go
+  filename: graph/gen/model/models.go
   package: model
 
 resolver:
   layout: follow-schema
-  dir: graph/resolver
+  dir: graph/gen/resolver
   package: resolver
+  filename_template: "{name}.go"
 
 models:
   ID:

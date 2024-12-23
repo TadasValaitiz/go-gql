@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"os"
 
-	gen "go-gql-demo/graph/generated"
-	resolv "go-gql-demo/graph/resolver"
+	gen "go-gql-demo/graph/gen/exec"
+	resolv "go-gql-demo/graph/gen/resolver"
 
 	"github.com/99designs/gqlgen/graphql"
 	"github.com/99designs/gqlgen/graphql/handler"
